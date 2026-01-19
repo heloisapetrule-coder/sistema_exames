@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exames do Dia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+    <h1>Controle de Exames - GASEO Limeira</h1>
+    <a href="{{ url_for('logout') }}" class="btn">Sair</a>
+    
+    <h2>Exames do dia: {{ hoje }}</h2>
+
+    <form action="{{ url_for('pesquisar') }}" method="POST">
+        <input type="text" name="termo" placeholder="Pesquisar por nome ou CPF">
+        <button type="submit">Pesquisar</button>
+    </form>
+
+    <form action="{{ url_for('cadastrar') }}" method="POST">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cpf" placeholder="CPF" required>
+        <input type="text" name="empresa" placeholder="Empresa">
+        <input type="text" name="planta" placeholder="Planta">
+        <input type="text" name="exame" placeholder="Exame" required>
+        <input type="date" name="data" value="{{ hoje }}">
+        <button type="submit">Cadastrar Exame</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Empresa</th>
+                <th>Exame</th>
+                <th>Planta</th>
+                <th>Status</th>
+                <th>PDF</th>
+                <th>Alterar Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for e in exames %}
+            <tr>
+                <td>{{ e.nome }}</td>
+                <td>{{ e.cpf }}</td>
+                <td>{{ e.empresa or '-' }}</td>
+                <td>{{ e.exame }}</td>
+                <td>{{ e.planta or '-' }}</td>
+                <td class="status-{{ e.status | lower | replace(' ','') }}">{{ e.status }}</td>
+                <td><a href="{{ url_for('gerar_pdf', id=e.id) }}" class="btn btn-pdf">PDF</a></td>
+                <td>
+                    <a href="{{ url_for('alterar_status', id=e.id, novo_status='Laudar') }}" class="btn">Laudar</a>
+                    <a href="{{ url_for('alterar_status', id=e.id, novo_status='Finalizado') }}" class="btn">Finalizado</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('arquivados') }}" class="btn">Ver Exames Arquivados</a>
+</div>
+</body>
+</html>

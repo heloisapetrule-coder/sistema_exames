@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Exames Arquivados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+    <img src="{{ url_for('static', filename='logo.png') }}" class="logo">
+    <h1>Exames Arquivados</h1>
+    <a href="{{ url_for('index') }}" class="btn">Voltar</a>
+
+    <form method="GET" action="{{ url_for('arquivados') }}">
+        <input type="date" name="data" value="{{ data_busca }}">
+        <button type="submit">Buscar por Data</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Empresa</th>
+                <th>Exame</th>
+                <th>Planta</th>
+                <th>Status</th>
+                <th>PDF</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for e in exames %}
+            <tr>
+                <td>{{ e.nome }}</td>
+                <td>{{ e.cpf }}</td>
+                <td>{{ e.empresa or '-' }}</td>
+                <td>{{ e.exame }}</td>
+                <td>{{ e.planta or '-' }}</td>
+                <td class="status-{{ e.status | lower | replace(' ','') }}">{{ e.status }}</td>
+                <td><a href="{{ url_for('gerar_pdf', id=e.id) }}" class="btn btn-pdf">PDF</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

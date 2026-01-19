@@ -1,0 +1,90 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+    background-color: #f0f4f8;
+    color: #333;
+}
+
+/* Container central */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 30px auto;
+}
+
+/* Logo */
+.logo {
+    height: 60px;
+    margin-bottom: 20px;
+}
+
+/* Títulos */
+h1, h2 {
+    color: #1a73e8;
+    margin-bottom: 20px;
+}
+
+/* Botões */
+button, .btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover, .btn:hover {
+    background-color: #155ab6;
+}
+
+/* Formulários */
+form input, form select {
+    padding: 8px;
+    margin: 5px 0 15px 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Tabela de exames */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Cores de status */
+.status-espera {
+    color: #ff9800;
+    font-weight: bold;
+}
+.status-laudar {
+    color: #1a73e8;
+    font-weight: bold;
+}
+.status-finalizado {
+    color: #4caf50;
+    font-weight: bold;
+}
+
+/* PDF / Arquivar */
+.btn-pdf {
+    background-color: #f44336;
+}
+.btn-pdf:hover {
+    background-color: #c62828;
+}
